@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f5058e6a505645a7a083167b0d7e91e0" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="myDBModel.synclog" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="myDBModel.tblProducerPermission" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="myDBModel.tblQuotationSummary" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="myDBModel.tblJob" Width="2.75" PointX="0.75" PointY="4.875" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

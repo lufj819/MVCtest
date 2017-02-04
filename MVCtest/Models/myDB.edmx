@@ -1,0 +1,489 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="myDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="synclog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="syncid" Type="uniqueidentifier" />
+          <Property Name="contents" Type="nvarchar" MaxLength="300" />
+          <Property Name="commit_time" Type="datetime" Nullable="false" />
+          <Property Name="logon_user" Type="nvarchar" MaxLength="50" />
+          <Property Name="operation" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="tablename" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="rowid" Type="int" Nullable="false" />
+          <Property Name="chrLocalNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="chrONLNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="eprojectid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="column_name" Type="nvarchar" MaxLength="30" />
+          <Property Name="original_value" Type="nvarchar" MaxLength="30" />
+          <Property Name="current_value" Type="nvarchar" MaxLength="30" />
+          <Property Name="undo_sql" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="tblJob">
+          <Key>
+            <PropertyRef Name="chrLocalNumber" />
+            <PropertyRef Name="chrONLNumber" />
+          </Key>
+          <Property Name="NumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="chrLocalNumber" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="chrONLNumber" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="chrName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="chrDivision" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="chrCountry" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="chrProductType" Type="nvarchar" MaxLength="255" />
+          <Property Name="chrSampleType" Type="nvarchar" MaxLength="255" />
+          <Property Name="chrIPG" Type="nvarchar" MaxLength="255" />
+          <Property Name="chrClient" Type="nvarchar" MaxLength="255" />
+          <Property Name="blKeyClient" Type="bit" Nullable="false" StoreGeneratedPattern="None" />
+          <Property Name="intComplexity" Type="int" />
+          <Property Name="dtmCreated" Type="datetime" />
+          <Property Name="blNeedCleaning" Type="bit" Nullable="false" />
+          <Property Name="blNeedTable" Type="bit" Nullable="false" />
+          <Property Name="blNeedCoding" Type="bit" Nullable="false" />
+          <Property Name="inteProjectID" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“myDB.dbo.tblProducerPermission”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="tblProducerPermission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="chrUserID" Type="nvarchar" MaxLength="255" />
+          <Property Name="blAuto" Type="bit" />
+          <Property Name="blCPG" Type="bit" />
+          <Property Name="blEtailer" Type="bit" />
+          <Property Name="blFinance" Type="bit" />
+          <Property Name="blMedia" Type="bit" />
+          <Property Name="blRetailerPlus" Type="bit" />
+          <Property Name="blTechTelco" Type="bit" />
+          <Property Name="blNIP" Type="bit" />
+          <Property Name="blME" Type="bit" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“myDB.dbo.tblQuotationSummary”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="tblQuotationSummary">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="chrQuotationNumber" />
+            <PropertyRef Name="chrMethod" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="chrQuotationNumber" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="chrMethod" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="chrWaveNo" Type="nvarchar" MaxLength="255" />
+          <Property Name="chrProjectName" Type="nvarchar(max)" />
+          <Property Name="dtmCreated" Type="datetime" />
+          <Property Name="memClarify" Type="nvarchar(max)" />
+          <Property Name="dblClarifyTimeSpent" Type="float" />
+          <Property Name="chrFresh" Type="nvarchar" MaxLength="255" />
+          <Property Name="dtmRFQMonth" Type="datetime" />
+          <Property Name="chrOffice" Type="nvarchar" MaxLength="50" />
+          <Property Name="chrClient" Type="nvarchar" MaxLength="255" />
+          <Property Name="chrVertical" Type="nvarchar" MaxLength="255" />
+          <Property Name="chrVertical2" Type="nvarchar" MaxLength="255" />
+          <Property Name="chrMethod2" Type="nvarchar" MaxLength="255" />
+          <Property Name="memDesignOptimization" Type="nvarchar(max)" />
+          <Property Name="memBenifit" Type="nvarchar(max)" />
+          <Property Name="intSampleSize" Type="int" />
+          <Property Name="dblLOI" Type="float" />
+          <Property Name="dblIR" Type="float" />
+          <Property Name="chrFrequency" Type="nvarchar" MaxLength="255" />
+          <Property Name="memTargetGroupDefinition" Type="nvarchar(max)" />
+          <Property Name="intOrders" Type="int" />
+          <Property Name="intRevisions" Type="int" />
+          <Property Name="chrCSContact" Type="nvarchar(max)" />
+          <Property Name="chrHubSPOC" Type="nvarchar(max)" />
+          <Property Name="chrProducer" Type="nvarchar(max)" />
+          <Property Name="dblDAOOP" Type="float" />
+          <Property Name="dblTotalDACost" Type="float" />
+          <Property Name="dblGOCost" Type="float" />
+          <Property Name="dblOralRevenue" Type="float" />
+          <Property Name="dtmBKFMRelease" Type="datetime" />
+          <Property Name="chrStatusUpdate" Type="nvarchar(max)" />
+          <Property Name="dtmLastUpdated" Type="datetime" />
+          <Property Name="chrTrackingOrNot" Type="nvarchar" MaxLength="255" />
+          <Property Name="dblVendorOOP" Type="float" />
+          <Property Name="dblVendorOutsource" Type="float" />
+          <Property Name="dblPreRecruit" Type="float" />
+          <Property Name="dblIncentive" Type="float" />
+          <Property Name="dblTravel" Type="float" />
+          <Property Name="dblVenue" Type="float" />
+          <Property Name="dblProductPurchase" Type="float" />
+          <Property Name="dblCentralTraining" Type="float" />
+          <Property Name="dblOther" Type="float" />
+          <Property Name="dblQC3rdParty" Type="float" />
+          <Property Name="dblQCTemp" Type="float" />
+          <Property Name="dblCoupon" Type="float" />
+          <Property Name="dblCentralTraining2" Type="float" />
+          <Property Name="dblFWTemp" Type="float" />
+          <Property Name="dblTnE" Type="float" />
+          <Property Name="dblQuotationOther" Type="float" />
+          <Property Name="dblNielsenOOP" Type="float" />
+          <Property Name="dblTotalExternalCost" Type="float" />
+          <Property Name="dblTotalInternalCost" Type="float" />
+        </EntityType>
+        <EntityContainer Name="myDBModelStoreContainer">
+          <EntitySet Name="synclog" EntityType="Self.synclog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblJob" EntityType="Self.tblJob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProducerPermission" EntityType="Self.tblProducerPermission" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblProducerPermission].[ID] AS [ID], 
+    [tblProducerPermission].[chrUserID] AS [chrUserID], 
+    [tblProducerPermission].[blAuto] AS [blAuto], 
+    [tblProducerPermission].[blCPG] AS [blCPG], 
+    [tblProducerPermission].[blEtailer] AS [blEtailer], 
+    [tblProducerPermission].[blFinance] AS [blFinance], 
+    [tblProducerPermission].[blMedia] AS [blMedia], 
+    [tblProducerPermission].[blRetailerPlus] AS [blRetailerPlus], 
+    [tblProducerPermission].[blTechTelco] AS [blTechTelco], 
+    [tblProducerPermission].[blNIP] AS [blNIP], 
+    [tblProducerPermission].[blME] AS [blME]
+    FROM [dbo].[tblProducerPermission] AS [tblProducerPermission]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblQuotationSummary" EntityType="Self.tblQuotationSummary" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblQuotationSummary].[ID] AS [ID], 
+    [tblQuotationSummary].[chrQuotationNumber] AS [chrQuotationNumber], 
+    [tblQuotationSummary].[chrMethod] AS [chrMethod], 
+    [tblQuotationSummary].[chrWaveNo] AS [chrWaveNo], 
+    [tblQuotationSummary].[chrProjectName] AS [chrProjectName], 
+    [tblQuotationSummary].[dtmCreated] AS [dtmCreated], 
+    [tblQuotationSummary].[memClarify] AS [memClarify], 
+    [tblQuotationSummary].[dblClarifyTimeSpent] AS [dblClarifyTimeSpent], 
+    [tblQuotationSummary].[chrFresh] AS [chrFresh], 
+    [tblQuotationSummary].[dtmRFQMonth] AS [dtmRFQMonth], 
+    [tblQuotationSummary].[chrOffice] AS [chrOffice], 
+    [tblQuotationSummary].[chrClient] AS [chrClient], 
+    [tblQuotationSummary].[chrVertical] AS [chrVertical], 
+    [tblQuotationSummary].[chrVertical2] AS [chrVertical2], 
+    [tblQuotationSummary].[chrMethod2] AS [chrMethod2], 
+    [tblQuotationSummary].[memDesignOptimization] AS [memDesignOptimization], 
+    [tblQuotationSummary].[memBenifit] AS [memBenifit], 
+    [tblQuotationSummary].[intSampleSize] AS [intSampleSize], 
+    [tblQuotationSummary].[dblLOI] AS [dblLOI], 
+    [tblQuotationSummary].[dblIR] AS [dblIR], 
+    [tblQuotationSummary].[chrFrequency] AS [chrFrequency], 
+    [tblQuotationSummary].[memTargetGroupDefinition] AS [memTargetGroupDefinition], 
+    [tblQuotationSummary].[intOrders] AS [intOrders], 
+    [tblQuotationSummary].[intRevisions] AS [intRevisions], 
+    [tblQuotationSummary].[chrCSContact] AS [chrCSContact], 
+    [tblQuotationSummary].[chrHubSPOC] AS [chrHubSPOC], 
+    [tblQuotationSummary].[chrProducer] AS [chrProducer], 
+    [tblQuotationSummary].[dblDAOOP] AS [dblDAOOP], 
+    [tblQuotationSummary].[dblTotalDACost] AS [dblTotalDACost], 
+    [tblQuotationSummary].[dblGOCost] AS [dblGOCost], 
+    [tblQuotationSummary].[dblOralRevenue] AS [dblOralRevenue], 
+    [tblQuotationSummary].[dtmBKFMRelease] AS [dtmBKFMRelease], 
+    [tblQuotationSummary].[chrStatusUpdate] AS [chrStatusUpdate], 
+    [tblQuotationSummary].[dtmLastUpdated] AS [dtmLastUpdated], 
+    [tblQuotationSummary].[chrTrackingOrNot] AS [chrTrackingOrNot], 
+    [tblQuotationSummary].[dblVendorOOP] AS [dblVendorOOP], 
+    [tblQuotationSummary].[dblVendorOutsource] AS [dblVendorOutsource], 
+    [tblQuotationSummary].[dblPreRecruit] AS [dblPreRecruit], 
+    [tblQuotationSummary].[dblIncentive] AS [dblIncentive], 
+    [tblQuotationSummary].[dblTravel] AS [dblTravel], 
+    [tblQuotationSummary].[dblVenue] AS [dblVenue], 
+    [tblQuotationSummary].[dblProductPurchase] AS [dblProductPurchase], 
+    [tblQuotationSummary].[dblCentralTraining] AS [dblCentralTraining], 
+    [tblQuotationSummary].[dblOther] AS [dblOther], 
+    [tblQuotationSummary].[dblQC3rdParty] AS [dblQC3rdParty], 
+    [tblQuotationSummary].[dblQCTemp] AS [dblQCTemp], 
+    [tblQuotationSummary].[dblCoupon] AS [dblCoupon], 
+    [tblQuotationSummary].[dblCentralTraining2] AS [dblCentralTraining2], 
+    [tblQuotationSummary].[dblFWTemp] AS [dblFWTemp], 
+    [tblQuotationSummary].[dblTnE] AS [dblTnE], 
+    [tblQuotationSummary].[dblQuotationOther] AS [dblQuotationOther], 
+    [tblQuotationSummary].[dblNielsenOOP] AS [dblNielsenOOP], 
+    [tblQuotationSummary].[dblTotalExternalCost] AS [dblTotalExternalCost], 
+    [tblQuotationSummary].[dblTotalInternalCost] AS [dblTotalInternalCost]
+    FROM [dbo].[tblQuotationSummary] AS [tblQuotationSummary]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="myDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="myDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="synclog" EntityType="myDBModel.synclog" />
+          <EntitySet Name="tblProducerPermission" EntityType="myDBModel.tblProducerPermission" />
+          <EntitySet Name="tblQuotationSummary" EntityType="myDBModel.tblQuotationSummary" />
+          <EntitySet Name="tblJob" EntityType="myDBModel.tblJob" />
+        </EntityContainer>
+        <EntityType Name="synclog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="syncid" Type="Guid" />
+          <Property Name="contents" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="commit_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="logon_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="operation" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="tablename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="rowid" Type="Int32" Nullable="false" />
+          <Property Name="chrLocalNumber" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="chrONLNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="eprojectid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="column_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="original_value" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="current_value" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="undo_sql" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblProducerPermission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="chrUserID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="blAuto" Type="Boolean" />
+          <Property Name="blCPG" Type="Boolean" />
+          <Property Name="blEtailer" Type="Boolean" />
+          <Property Name="blFinance" Type="Boolean" />
+          <Property Name="blMedia" Type="Boolean" />
+          <Property Name="blRetailerPlus" Type="Boolean" />
+          <Property Name="blTechTelco" Type="Boolean" />
+          <Property Name="blNIP" Type="Boolean" />
+          <Property Name="blME" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tblQuotationSummary">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="chrQuotationNumber" />
+            <PropertyRef Name="chrMethod" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="chrQuotationNumber" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="chrMethod" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="chrWaveNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="chrProjectName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dtmCreated" Type="DateTime" Precision="3" />
+          <Property Name="memClarify" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dblClarifyTimeSpent" Type="Double" />
+          <Property Name="chrFresh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="dtmRFQMonth" Type="DateTime" Precision="3" />
+          <Property Name="chrOffice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="chrClient" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="chrVertical" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="chrVertical2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="chrMethod2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="memDesignOptimization" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="memBenifit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="intSampleSize" Type="Int32" />
+          <Property Name="dblLOI" Type="Double" />
+          <Property Name="dblIR" Type="Double" />
+          <Property Name="chrFrequency" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="memTargetGroupDefinition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="intOrders" Type="Int32" />
+          <Property Name="intRevisions" Type="Int32" />
+          <Property Name="chrCSContact" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="chrHubSPOC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="chrProducer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dblDAOOP" Type="Double" />
+          <Property Name="dblTotalDACost" Type="Double" />
+          <Property Name="dblGOCost" Type="Double" />
+          <Property Name="dblOralRevenue" Type="Double" />
+          <Property Name="dtmBKFMRelease" Type="DateTime" Precision="3" />
+          <Property Name="chrStatusUpdate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dtmLastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="chrTrackingOrNot" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="dblVendorOOP" Type="Double" />
+          <Property Name="dblVendorOutsource" Type="Double" />
+          <Property Name="dblPreRecruit" Type="Double" />
+          <Property Name="dblIncentive" Type="Double" />
+          <Property Name="dblTravel" Type="Double" />
+          <Property Name="dblVenue" Type="Double" />
+          <Property Name="dblProductPurchase" Type="Double" />
+          <Property Name="dblCentralTraining" Type="Double" />
+          <Property Name="dblOther" Type="Double" />
+          <Property Name="dblQC3rdParty" Type="Double" />
+          <Property Name="dblQCTemp" Type="Double" />
+          <Property Name="dblCoupon" Type="Double" />
+          <Property Name="dblCentralTraining2" Type="Double" />
+          <Property Name="dblFWTemp" Type="Double" />
+          <Property Name="dblTnE" Type="Double" />
+          <Property Name="dblQuotationOther" Type="Double" />
+          <Property Name="dblNielsenOOP" Type="Double" />
+          <Property Name="dblTotalExternalCost" Type="Double" />
+          <Property Name="dblTotalInternalCost" Type="Double" />
+        </EntityType>
+        <EntityType Name="tblJob">
+          <Key>
+            <PropertyRef Name="chrLocalNumber" />
+            <PropertyRef Name="chrONLNumber" />
+          </Key>
+          <Property Name="NumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="chrLocalNumber" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="chrONLNumber" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="chrName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="chrDivision" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="chrCountry" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="chrProductType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="chrSampleType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="chrIPG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="chrClient" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="blKeyClient" Type="Boolean" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="intComplexity" Type="Int32" />
+          <Property Name="dtmCreated" Type="DateTime" Precision="3" />
+          <Property Name="blNeedCleaning" Type="Boolean" Nullable="false" />
+          <Property Name="blNeedTable" Type="Boolean" Nullable="false" />
+          <Property Name="blNeedCoding" Type="Boolean" Nullable="false" />
+          <Property Name="inteProjectID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="myDBModelStoreContainer" CdmEntityContainer="myDBEntities">
+          <EntitySetMapping Name="synclog">
+            <EntityTypeMapping TypeName="myDBModel.synclog">
+              <MappingFragment StoreEntitySet="synclog">
+                <ScalarProperty Name="undo_sql" ColumnName="undo_sql" />
+                <ScalarProperty Name="current_value" ColumnName="current_value" />
+                <ScalarProperty Name="original_value" ColumnName="original_value" />
+                <ScalarProperty Name="column_name" ColumnName="column_name" />
+                <ScalarProperty Name="eprojectid" ColumnName="eprojectid" />
+                <ScalarProperty Name="chrONLNumber" ColumnName="chrONLNumber" />
+                <ScalarProperty Name="chrLocalNumber" ColumnName="chrLocalNumber" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+                <ScalarProperty Name="tablename" ColumnName="tablename" />
+                <ScalarProperty Name="operation" ColumnName="operation" />
+                <ScalarProperty Name="logon_user" ColumnName="logon_user" />
+                <ScalarProperty Name="commit_time" ColumnName="commit_time" />
+                <ScalarProperty Name="contents" ColumnName="contents" />
+                <ScalarProperty Name="syncid" ColumnName="syncid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProducerPermission">
+            <EntityTypeMapping TypeName="myDBModel.tblProducerPermission">
+              <MappingFragment StoreEntitySet="tblProducerPermission">
+                <ScalarProperty Name="blME" ColumnName="blME" />
+                <ScalarProperty Name="blNIP" ColumnName="blNIP" />
+                <ScalarProperty Name="blTechTelco" ColumnName="blTechTelco" />
+                <ScalarProperty Name="blRetailerPlus" ColumnName="blRetailerPlus" />
+                <ScalarProperty Name="blMedia" ColumnName="blMedia" />
+                <ScalarProperty Name="blFinance" ColumnName="blFinance" />
+                <ScalarProperty Name="blEtailer" ColumnName="blEtailer" />
+                <ScalarProperty Name="blCPG" ColumnName="blCPG" />
+                <ScalarProperty Name="blAuto" ColumnName="blAuto" />
+                <ScalarProperty Name="chrUserID" ColumnName="chrUserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblQuotationSummary">
+            <EntityTypeMapping TypeName="myDBModel.tblQuotationSummary">
+              <MappingFragment StoreEntitySet="tblQuotationSummary">
+                <ScalarProperty Name="dblTotalInternalCost" ColumnName="dblTotalInternalCost" />
+                <ScalarProperty Name="dblTotalExternalCost" ColumnName="dblTotalExternalCost" />
+                <ScalarProperty Name="dblNielsenOOP" ColumnName="dblNielsenOOP" />
+                <ScalarProperty Name="dblQuotationOther" ColumnName="dblQuotationOther" />
+                <ScalarProperty Name="dblTnE" ColumnName="dblTnE" />
+                <ScalarProperty Name="dblFWTemp" ColumnName="dblFWTemp" />
+                <ScalarProperty Name="dblCentralTraining2" ColumnName="dblCentralTraining2" />
+                <ScalarProperty Name="dblCoupon" ColumnName="dblCoupon" />
+                <ScalarProperty Name="dblQCTemp" ColumnName="dblQCTemp" />
+                <ScalarProperty Name="dblQC3rdParty" ColumnName="dblQC3rdParty" />
+                <ScalarProperty Name="dblOther" ColumnName="dblOther" />
+                <ScalarProperty Name="dblCentralTraining" ColumnName="dblCentralTraining" />
+                <ScalarProperty Name="dblProductPurchase" ColumnName="dblProductPurchase" />
+                <ScalarProperty Name="dblVenue" ColumnName="dblVenue" />
+                <ScalarProperty Name="dblTravel" ColumnName="dblTravel" />
+                <ScalarProperty Name="dblIncentive" ColumnName="dblIncentive" />
+                <ScalarProperty Name="dblPreRecruit" ColumnName="dblPreRecruit" />
+                <ScalarProperty Name="dblVendorOutsource" ColumnName="dblVendorOutsource" />
+                <ScalarProperty Name="dblVendorOOP" ColumnName="dblVendorOOP" />
+                <ScalarProperty Name="chrTrackingOrNot" ColumnName="chrTrackingOrNot" />
+                <ScalarProperty Name="dtmLastUpdated" ColumnName="dtmLastUpdated" />
+                <ScalarProperty Name="chrStatusUpdate" ColumnName="chrStatusUpdate" />
+                <ScalarProperty Name="dtmBKFMRelease" ColumnName="dtmBKFMRelease" />
+                <ScalarProperty Name="dblOralRevenue" ColumnName="dblOralRevenue" />
+                <ScalarProperty Name="dblGOCost" ColumnName="dblGOCost" />
+                <ScalarProperty Name="dblTotalDACost" ColumnName="dblTotalDACost" />
+                <ScalarProperty Name="dblDAOOP" ColumnName="dblDAOOP" />
+                <ScalarProperty Name="chrProducer" ColumnName="chrProducer" />
+                <ScalarProperty Name="chrHubSPOC" ColumnName="chrHubSPOC" />
+                <ScalarProperty Name="chrCSContact" ColumnName="chrCSContact" />
+                <ScalarProperty Name="intRevisions" ColumnName="intRevisions" />
+                <ScalarProperty Name="intOrders" ColumnName="intOrders" />
+                <ScalarProperty Name="memTargetGroupDefinition" ColumnName="memTargetGroupDefinition" />
+                <ScalarProperty Name="chrFrequency" ColumnName="chrFrequency" />
+                <ScalarProperty Name="dblIR" ColumnName="dblIR" />
+                <ScalarProperty Name="dblLOI" ColumnName="dblLOI" />
+                <ScalarProperty Name="intSampleSize" ColumnName="intSampleSize" />
+                <ScalarProperty Name="memBenifit" ColumnName="memBenifit" />
+                <ScalarProperty Name="memDesignOptimization" ColumnName="memDesignOptimization" />
+                <ScalarProperty Name="chrMethod2" ColumnName="chrMethod2" />
+                <ScalarProperty Name="chrVertical2" ColumnName="chrVertical2" />
+                <ScalarProperty Name="chrVertical" ColumnName="chrVertical" />
+                <ScalarProperty Name="chrClient" ColumnName="chrClient" />
+                <ScalarProperty Name="chrOffice" ColumnName="chrOffice" />
+                <ScalarProperty Name="dtmRFQMonth" ColumnName="dtmRFQMonth" />
+                <ScalarProperty Name="chrFresh" ColumnName="chrFresh" />
+                <ScalarProperty Name="dblClarifyTimeSpent" ColumnName="dblClarifyTimeSpent" />
+                <ScalarProperty Name="memClarify" ColumnName="memClarify" />
+                <ScalarProperty Name="dtmCreated" ColumnName="dtmCreated" />
+                <ScalarProperty Name="chrProjectName" ColumnName="chrProjectName" />
+                <ScalarProperty Name="chrWaveNo" ColumnName="chrWaveNo" />
+                <ScalarProperty Name="chrMethod" ColumnName="chrMethod" />
+                <ScalarProperty Name="chrQuotationNumber" ColumnName="chrQuotationNumber" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblJob">
+            <EntityTypeMapping TypeName="myDBModel.tblJob">
+              <MappingFragment StoreEntitySet="tblJob">
+                <ScalarProperty Name="inteProjectID" ColumnName="inteProjectID" />
+                <ScalarProperty Name="blNeedCoding" ColumnName="blNeedCoding" />
+                <ScalarProperty Name="blNeedTable" ColumnName="blNeedTable" />
+                <ScalarProperty Name="blNeedCleaning" ColumnName="blNeedCleaning" />
+                <ScalarProperty Name="dtmCreated" ColumnName="dtmCreated" />
+                <ScalarProperty Name="intComplexity" ColumnName="intComplexity" />
+                <ScalarProperty Name="blKeyClient" ColumnName="blKeyClient" />
+                <ScalarProperty Name="chrClient" ColumnName="chrClient" />
+                <ScalarProperty Name="chrIPG" ColumnName="chrIPG" />
+                <ScalarProperty Name="chrSampleType" ColumnName="chrSampleType" />
+                <ScalarProperty Name="chrProductType" ColumnName="chrProductType" />
+                <ScalarProperty Name="chrCountry" ColumnName="chrCountry" />
+                <ScalarProperty Name="chrDivision" ColumnName="chrDivision" />
+                <ScalarProperty Name="chrName" ColumnName="chrName" />
+                <ScalarProperty Name="chrONLNumber" ColumnName="chrONLNumber" />
+                <ScalarProperty Name="chrLocalNumber" ColumnName="chrLocalNumber" />
+                <ScalarProperty Name="NumID" ColumnName="NumID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
