@@ -298,13 +298,6 @@
     <Compile Include="NotMVC\正则表达式.aspx.designer.cs">
       <DependentUpon>正则表达式.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -348,7 +341,6 @@
     <Content Include="Scripts\My97DatePicker\WdatePicker.js" />
     <Content Include="Scripts\project\bkfmmanageform.js" />
     <Content Include="NotMVC\正则表达式.aspx" />
-    <Content Include="WebForm1.aspx" />
     <EntityDeploy Include="Models\myDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>myDB.Designer.cs</LastGenOutput>
